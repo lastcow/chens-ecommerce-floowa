@@ -8,7 +8,7 @@ spring:
   messages:
     basename: i18n/messages
   datasource:
-    url: jdbc:mysql://localhost:3306/ecommerce?useSSL=false
+    url: jdbc:mysql://localhost:3306/ecommerce?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: root
   jpa:

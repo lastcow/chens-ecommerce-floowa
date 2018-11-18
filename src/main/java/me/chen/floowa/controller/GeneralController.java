@@ -8,6 +8,6 @@ public class GeneralController {
 
     @GetMapping(value = "/")
     public String index(){
-        return "index";
+        return "login";
     }
 }
