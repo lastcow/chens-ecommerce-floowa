@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="admin_top" class="menu-w
+                                    color-scheme-light
+                                    color-style-default
+                                    menu-position-top
+                                    menu-layout-compact
+                                    selected-menu-color-bright">
+    <div class="logo-w">
+        <a class="logo" href="index.html">
+            <div class="logo-element"></div>
+            <div class="logo-label" th:text="#{global.logo.label}">
+                Chens
+            </div>
+        </a>
+    </div>
+    <h1 class="menu-page-header">
+        Page Header
+    </h1>
+    <ul class="main-menu">
+        <li class="sub-header">
+            <span>Layouts</span>
+        </li>
+        <li>
+            <a href="index.html">
+                <div class="icon-w">
+                    <div class="os-icon os-icon-layout"></div>
+                </div>
+                <span>Dashboard</span></a>
+        </li>
+        <li class="">
+            <a href="layouts_menu_top_image.html">
+                <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Shop Categories</span><strong class="badge badge-primary">24 Items</strong> </a>
+        </li>
+        <!--Agent can view all customers, include those customers not purchased from the agent-->
+        <li>
+            <a href="layouts_menu_top_image.html">
+                <div class="icon-w">
+                    <div class="os-icon os-icon-user-male-circle"></div>
+                </div>
+                <span>Customers</span></a>
+        </li>
+        <!---->
+        <li>
+            <a href="layouts_menu_top_image.html">
+                <div class="icon-w">
+                    <div class="os-icon os-icon-cv-2"></div>
+                </div>
+                <span>Agents</span></a>
+        </li>
+        <!--For system admin only, list all users include customers and agents.-->
+        <!--<li sec:authorize="hasRole('ROLE_ADMIN')">-->
+        <li>    <a href="layouts_menu_top_image.html">
+                <div class="icon-w">
+                    <div class="os-icon os-icon-user-check"></div>
+                </div>
+                <span>Users</span><strong class="badge badge-dark">C:13 / A:3</strong></a>
+        </li>
+        <!--Display own orders-->
+        <li>
+            <a href="layouts_menu_top_image.html">
+                <div class="icon-w">
+                    <div class="os-icon os-icon-shopping-bag"></div>
+                </div>
+                <span>Orders</span><strong class="badge badge-danger">$33,435 Pending</strong></a>
+        </li>
+        <li>
+            <a href="layouts_menu_top_image.html">
+                <div class="icon-w">
+                    <div class="os-icon os-icon-help-circle"></div>
+                </div>
+                <span>Support & Help</span></a>
+        </li>
+    </ul>
+    <div class="side-menu-magic">
+        <h4>
+            Light Admin
+        </h4>
+        <p>
+            Clean Bootstrap 4 Template
+        </p>
+        <div class="btn-w">
+            <a class="btn btn-white btn-rounded" href="https://themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/19760124?ref=Osetin" target="_blank">Purchase Now</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
