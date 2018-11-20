@@ -2,6 +2,7 @@ package me.chen.floowa.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class GeneralController {
@@ -16,8 +17,13 @@ public class GeneralController {
         return "login";
     }
 
-    @GetMapping(value = "/dashboard")
+    @GetMapping(value = "/admin/dashboard")
     public String dashboard(){
         return "dashboard";
+    }
+
+    @GetMapping(value = "/admin/users")
+    public String users(){
+        return "users";
     }
 }
