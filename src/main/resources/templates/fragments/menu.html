@@ -27,14 +27,14 @@
         Page Header
     </h1>
     <ul class="main-menu">
-        <li class="selected">
+        <li id="main_menu_dashboard">
             <a href="index.html">
                 <div class="icon-w">
                     <div class="os-icon os-icon-layout"></div>
                 </div>
                 <span>Dashboard</span></a>
         </li>
-        <li class="">
+        <li id="main_menu_shop">
             <a href="layouts_menu_top_image.html">
                 <div class="icon-w">
                     <div class="os-icon os-icon-layers"></div>
@@ -42,7 +42,7 @@
                 <span>Shop</span><strong class="badge badge-primary">24 Items</strong> </a>
         </li>
         <!--Agent can view all customers, include those customers not purchased from the agent-->
-        <li>
+        <li id="main_menu_customers">
             <a href="layouts_menu_top_image.html">
                 <div class="icon-w">
                     <div class="os-icon os-icon-user-male-circle"></div>
@@ -50,7 +50,7 @@
                 <span>Customers</span></a>
         </li>
         <!---->
-        <li>
+        <li id="main_menu_agents">
             <a href="layouts_menu_top_image.html">
                 <div class="icon-w">
                     <div class="os-icon os-icon-cv-2"></div>
@@ -59,21 +59,22 @@
         </li>
         <!--For system admin only, list all users include customers and agents.-->
         <!--<li sec:authorize="hasRole('ROLE_ADMIN')">-->
-        <li>    <a href="layouts_menu_top_image.html">
+        <li id="main_menu_users">
+            <a href="layouts_menu_top_image.html">
                 <div class="icon-w">
                     <div class="os-icon os-icon-user-check"></div>
                 </div>
                 <span>Users</span><strong class="badge badge-dark">C:13 / A:3</strong></a>
         </li>
         <!--Display own orders-->
-        <li>
+        <li id="main_menu_orders">
             <a href="layouts_menu_top_image.html">
                 <div class="icon-w">
                     <div class="os-icon os-icon-shopping-bag"></div>
                 </div>
                 <span>Orders</span><strong class="badge badge-danger">$33,435 Pending</strong></a>
         </li>
-        <li>
+        <li id="main_menu_help">
             <a href="layouts_menu_top_image.html">
                 <div class="icon-w">
                     <div class="os-icon os-icon-help-circle"></div>
@@ -83,10 +84,10 @@
     </ul>
     <div class="side-menu-magic">
         <h4>
-            Light Admin
+            Chens LLC
         </h4>
         <p>
-            Clean Bootstrap 4 Template
+            Find best price here
         </p>
         <div class="btn-w">
             <a class="btn btn-white btn-rounded" href="https://themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/19760124?ref=Osetin" target="_blank">Purchase Now</a>

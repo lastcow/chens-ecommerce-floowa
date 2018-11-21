@@ -22,6 +22,7 @@ public class User {
     private String contactNumber;
     private String wechat;
     private String qq;
+    private String country;
 
     @Column(unique = true)
     private String email;
