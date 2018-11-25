@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 80
 
 
 spring:
@@ -18,3 +18,8 @@ spring:
   queries:
     users-query: select username, password, active from user where username = ?
     roles-query: select u.username, ur.name from user u right join role ur on (u.role_id = ur.id) where u.username = ?
+
+
+contextio:
+  key: b3owis1w
+  client-secret: kQu4fxlTYzQ5PjJU

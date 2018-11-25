@@ -40,11 +40,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/").permitAll()
+                    .antMatchers("/contextio/**").permitAll()
                     .antMatchers("/admin/**", "/data/**").authenticated()
                     .antMatchers("/admin/system/**").hasRole("ADMIN")
                     .and()
                 .formLogin()
-                    .loginPage("/login")
+                    .loginPage("/login").defaultSuccessUrl("/admin/dashboard")
                     .permitAll()
                     .and()
                 .logout()
