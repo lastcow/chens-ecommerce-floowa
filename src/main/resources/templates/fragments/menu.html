@@ -28,14 +28,14 @@
     </h1>
     <ul class="main-menu">
         <li id="main_menu_dashboard">
-            <a href="index.html">
+            <a th:href="@{/admin/dashboard}">
                 <div class="icon-w">
                     <div class="os-icon os-icon-layout"></div>
                 </div>
                 <span>Dashboard</span></a>
         </li>
         <li id="main_menu_shop">
-            <a href="layouts_menu_top_image.html">
+            <a th:href="@{/admin/shop}">
                 <div class="icon-w">
                     <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -43,7 +43,7 @@
         </li>
         <!--Agent can view all customers, include those customers not purchased from the agent-->
         <li id="main_menu_customers">
-            <a href="layouts_menu_top_image.html">
+            <a th:href="@{/admin/customers}">
                 <div class="icon-w">
                     <div class="os-icon os-icon-user-male-circle"></div>
                 </div>
@@ -51,7 +51,7 @@
         </li>
         <!---->
         <li id="main_menu_agents">
-            <a href="layouts_menu_top_image.html">
+            <a th:href="@{/admin/agents}">
                 <div class="icon-w">
                     <div class="os-icon os-icon-cv-2"></div>
                 </div>
@@ -60,7 +60,7 @@
         <!--For system admin only, list all users include customers and agents.-->
         <!--<li sec:authorize="hasRole('ROLE_ADMIN')">-->
         <li id="main_menu_users">
-            <a href="layouts_menu_top_image.html">
+            <a th:href="@{/admin/users}">
                 <div class="icon-w">
                     <div class="os-icon os-icon-user-check"></div>
                 </div>
@@ -68,11 +68,20 @@
         </li>
         <!--Display own orders-->
         <li id="main_menu_orders">
-            <a href="layouts_menu_top_image.html">
+            <a th:href="@{/admin/orders}">
                 <div class="icon-w">
                     <div class="os-icon os-icon-shopping-bag"></div>
                 </div>
                 <span>Orders</span><strong class="badge badge-danger">$33,435 Pending</strong></a>
+        </li>
+        <!--Coupon code for Nvidia-->
+        <li id="main_menu_coupon_nvidia" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a th:href="@{/admin/system/coupon/nvidia}">
+                <div class="icon-w">
+                    <div class="os-icon os-icon-award"> </div>
+                </div>
+                <span>Coupon - Nvidia</span><strong class="badge badge-warning">34</strong>
+            </a>
         </li>
         <li id="main_menu_help">
             <a href="layouts_menu_top_image.html">

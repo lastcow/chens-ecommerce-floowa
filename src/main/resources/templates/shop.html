@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin}">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<th:block layout:fragment="script">
+    <script th:src="@{/js/shop.js}"></script>
+</th:block>
+</body>
+<th:block layout:fragment="content">
+    <div class="content-box">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="element-wrapper">
+                    <div class="element-actions">
+                        <dev class="justify-content-sm-end">
+                        </dev>
+                    </div>
+                    <h6 class="element-header">
+                        Users
+                    </h6>
+                    <div class="element-content">
+                        <div class="element-box">
+                            <div id="dgUsers"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------
+    START - Sidebar
+    -------------------->
+    <div class="content-panel">
+        <div class="content-panel-close">
+            <i class="os-icon os-icon-close"></i>
+        </div>
+        <div class="element-wrapper">
+            <h6 class="element-header">
+                Quick Links
+            </h6>
+            <div class="element-box-tp">
+                <div class="el-buttons-list full-width">
+                    <button class="btn btn-outline-primary btn-block" type="button"><i class="fa fa-user-plus"></i> Invite User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------
+    END - Sidebar
+    -------------------->
+</th:block>
+</html>

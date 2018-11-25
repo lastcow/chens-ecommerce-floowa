@@ -1,7 +1,9 @@
 package me.chen.floowa.bootstrap;
 
+import me.chen.floowa.model.CouponNvidia;
 import me.chen.floowa.model.Role;
 import me.chen.floowa.model.User;
+import me.chen.floowa.service.NvidiaCouponService;
 import me.chen.floowa.service.RoleService;
 import me.chen.floowa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     UserService userService;
     @Autowired
     RoleService roleService;
+    @Autowired
+    NvidiaCouponService nvidiaCouponService;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -65,5 +69,67 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         user.setActive(true);
         user.setRole(role);
         userService.create(user);
+
+        // Add coupon
+        CouponNvidia couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("7xq7vbnow");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
+        couponNvidia = new CouponNvidia();
+        couponNvidia.setCode("xggfred8o");
+        couponNvidia.setValid(true);
+        couponNvidia.setUsed(false);
+        nvidiaCouponService.create(couponNvidia);
+
     }
 }
