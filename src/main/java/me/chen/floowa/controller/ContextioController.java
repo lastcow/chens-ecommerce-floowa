@@ -119,6 +119,7 @@ public class ContextioController {
      */
     private boolean isAuthorizedRequest(String message, String secret, String signature) throws InvalidKeyException, NoSuchAlgorithmException {
 
+        System.out.println("Message: " + message + " | secert: " + secret + " |signature: " + signature);
         return ApiSecurity.hmac_sha256(message, secret).equals(signature);
     }
 }
