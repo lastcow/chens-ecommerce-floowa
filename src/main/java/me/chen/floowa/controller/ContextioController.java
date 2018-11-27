@@ -62,12 +62,12 @@ public class ContextioController {
             return;
         }
 
-        // Get account id
-        String accountId = contextIoCouponEmailPayload.getAccount_id();
-        // Get recipient, coupon email only have one recipient, so we always get first one.
-        String recipient = contextIoCouponEmailPayload.getMessageData().getCouponEmailAddress().getCouponEmailAddressTos().get(0).getEmail();
-        // Get message id
-        String messageId = contextIoCouponEmailPayload.getMessageData().getMessage_id();
+//        // Get account id
+//        String accountId = contextIoCouponEmailPayload.getAccount_id();
+//        // Get recipient, coupon email only have one recipient, so we always get first one.
+//        String recipient = contextIoCouponEmailPayload.getMessageData().getCouponEmailAddress().getCouponEmailAddressTos().get(0).getEmail();
+//        // Get message id
+//        String messageId = contextIoCouponEmailPayload.getMessageData().getMessage_id();
 
         LOGGER.info("Checking coupon email");
         // Get email bodies list
@@ -118,8 +118,6 @@ public class ContextioController {
      * @throws NoSuchAlgorithmException
      */
     private boolean isAuthorizedRequest(String message, String secret, String signature) throws InvalidKeyException, NoSuchAlgorithmException {
-
-        System.out.println("Message: " + message + " | secert: " + secret + " |signature: " + signature);
         return ApiSecurity.hmac_sha256(message, secret).equals(signature);
     }
 }
