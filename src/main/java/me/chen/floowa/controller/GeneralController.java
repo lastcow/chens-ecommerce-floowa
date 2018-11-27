@@ -16,12 +16,7 @@ public class GeneralController {
     @Autowired
     NvidiaCouponService nvidiaCouponService;
 
-    @GetMapping(value = "/")
-    public String index(){
-        return "index";
-    }
-
-    @GetMapping(value = "/login")
+    @GetMapping(value = {"/login", "/"} )
     public String login(){
         return "login";
     }
