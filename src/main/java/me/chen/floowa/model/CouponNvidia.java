@@ -3,6 +3,7 @@ package me.chen.floowa.model;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,9 +18,10 @@ public class CouponNvidia {
     @GenericGenerator(name="system-uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
+    @Column(unique = true)
     private String code;
     private int goodForUnits;
-    private boolean isUsed;
+    private boolean used;
 
     private Date appliedDate;
     private boolean valid;

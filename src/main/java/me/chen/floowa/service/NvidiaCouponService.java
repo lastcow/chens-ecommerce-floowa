@@ -42,4 +42,33 @@ public class NvidiaCouponService {
 
         return nvidiaCouponRepository.save(couponNvidia);
     }
+
+    /**
+     * Update nvidia coupon entity
+     * @param code
+     * @return
+     */
+    public CouponNvidia makeUsed(String code){
+        CouponNvidia couponNvidia = nvidiaCouponRepository.findByCode(code);
+        couponNvidia.setUsed(true);
+        return nvidiaCouponRepository.save(couponNvidia);
+    }
+
+    /**
+     * Get all nvidia coupons based on used status.
+     * @param used
+     * @return
+     */
+    public List<CouponNvidia> getNvidiaCouponseUsed(boolean used){
+        return nvidiaCouponRepository.getByUsed(used);
+    }
+
+    /**
+     * Get coupons count based used status
+     * @param used
+     * @return
+     */
+    public int getTotalNvidiaCouponsByUsed(boolean used){
+        return nvidiaCouponRepository.countCouponNvidiaByUsed(used);
+    }
 }

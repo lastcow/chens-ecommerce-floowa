@@ -41,13 +41,4 @@ public class GeneralController {
         return "users";
     }
 
-    @GetMapping(value = "/admin/system/coupon/nvidia")
-    public String nvidiaCoupons(ModelMap modelMap){
-
-        // Get coupons
-        List<CouponNvidia> couponNvidias = nvidiaCouponService.getNvidiaCouponse();
-        modelMap.addAttribute("coupons", couponNvidias);
-
-        return "coupon_nvidia";
-    }
 }

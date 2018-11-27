@@ -83,53 +83,5 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         couponNvidia.setUsed(false);
         nvidiaCouponService.create(couponNvidia);
 
-        couponNvidia = new CouponNvidia();
-        couponNvidia.setCode("xggfred8o");
-        couponNvidia.setValid(true);
-        couponNvidia.setUsed(false);
-        nvidiaCouponService.create(couponNvidia);
-
-        couponNvidia = new CouponNvidia();
-        couponNvidia.setCode("xggfred8o");
-        couponNvidia.setValid(true);
-        couponNvidia.setUsed(false);
-        nvidiaCouponService.create(couponNvidia);
-
-        couponNvidia = new CouponNvidia();
-        couponNvidia.setCode("xggfred8o");
-        couponNvidia.setValid(true);
-        couponNvidia.setUsed(false);
-        nvidiaCouponService.create(couponNvidia);
-
-        couponNvidia = new CouponNvidia();
-        couponNvidia.setCode("xggfred8o");
-        couponNvidia.setValid(true);
-        couponNvidia.setUsed(false);
-        nvidiaCouponService.create(couponNvidia);
-
-        couponNvidia = new CouponNvidia();
-        couponNvidia.setCode("xggfred8o");
-        couponNvidia.setValid(true);
-        couponNvidia.setUsed(false);
-        nvidiaCouponService.create(couponNvidia);
-
-        couponNvidia = new CouponNvidia();
-        couponNvidia.setCode("xggfred8o");
-        couponNvidia.setValid(true);
-        couponNvidia.setUsed(false);
-        nvidiaCouponService.create(couponNvidia);
-
-        couponNvidia = new CouponNvidia();
-        couponNvidia.setCode("xggfred8o");
-        couponNvidia.setValid(true);
-        couponNvidia.setUsed(false);
-        nvidiaCouponService.create(couponNvidia);
-
-        couponNvidia = new CouponNvidia();
-        couponNvidia.setCode("xggfred8o");
-        couponNvidia.setValid(true);
-        couponNvidia.setUsed(false);
-        nvidiaCouponService.create(couponNvidia);
-
     }
 }

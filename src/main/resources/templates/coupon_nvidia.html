@@ -26,10 +26,12 @@
                     <div class="element-content">
                         <!--<div class="element-box">-->
                             <div class="row">
-                                <div th:each="coupon: ${coupons}" class="col-sm-2 border border-info m-2 p-2">
-                                    <span th:text="${coupon.code}"></span>
-                                    <span class="pull-right"><a href="#"><i class="os-icon os-icon-shopping-bag text-info btn"></i></a> </span>
-                                    <span class="pull-right"><a href="#"><i class="os-icon os-icon-trash-2 text-danger btn"></i> </a> </span>
+                                <div th:each="coupon: ${coupons}" class="col-sm-2 border border-info m-2 p-2" th:id="'coupon_' + ${coupon.code}">
+                                    <span>
+                                        <th:block th:text="${coupon.code}" class="pull-left"></th:block>
+                                        <a class="pull-right btn-link" th:onclick="confirmCodeUsage([[${coupon.code}]])" href="#">Use it !</a>
+                                    </span>
+
                                 </div>
                             </div>
                         <!--</div>-->
