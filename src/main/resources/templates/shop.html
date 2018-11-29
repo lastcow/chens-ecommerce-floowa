@@ -2,6 +2,7 @@
 <html th:lang="${#locale.language}"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/admin}">
 <head>
     <meta charset="utf-8"/>
@@ -25,18 +26,33 @@
                     </h6>
                     <div class="element-content">
                         <div class="row">
-                            <div class="col-md-3 p-1" >
+                            <div class="col-md-3 p-1" th:each="item : ${items}">
                                 <div class="card">
-                                    <img class="card-img-top" src="http://res.cloudinary.com/chenscorp/image/upload/c_fill,h_180,w_286/v1525480937/e-commerice/91w4iBgHaRL._SX679_.jpg" alt="Card image cap">
+                                    <img class="card-img-top" th:src="${item.imgUrl}">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title<span class="pull-right h6 font-weight-light">$ 459.99</span> </h5>
-                                        <p class="card-text">Ship to HongKong.</p>
-                                        <p>In stock:<span class="pull-right">12</span> </p>
-                                        <p><a href="#" class="btn btn-primary">Add to card</a><span class="h7 font-weight-light pull-right pt-1 text-danger">MOQ: 40</span></p>
+                                        <h5 class="card-title" th:text="${item.name}"></h5>
+                                        <dl class="row">
+
+                                            <th:block sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
+                                                <dt class="col-sm-7">Price<span sec:authorize="hasRole('ROLE_ADMIN')"> - Client</span></dt><dd class="col-sm-5" th:text="'$ ' + ${#numbers.formatDecimal(item.priceCustomer, 0, 'COMMA', 2, 'POINT')}"></dd>
+                                            </th:block>
+                                            <th:block sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
+                                                <dt class="col-sm-7"><abbr title="Minimal Order Quantity" class="initialism">MOQ</abbr><span sec:authorize="hasRole('ROLE_ADMIN')"> - Client</span></dt><dd class="col-sm-5" th:text="${item.minimalOrderCustomer}"></dd>
+                                            </th:block>
+                                            <th:block sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AGENT')">
+                                                <dt class="col-sm-7">Price<span sec:authorize="hasRole('ROLE_ADMIN')"> - Agent</span></dt><dd class="col-sm-5" th:text="'$ ' + ${#numbers.formatDecimal(item.priceAgent, 0, 'COMMA', 2, 'POINT')}"></dd>
+                                            </th:block>
+                                            <th:block sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AGENT')">
+                                                <dt class="col-sm-7"><abbr title="Minimal Order Quantity" class="initialism">MOQ</abbr><span sec:authorize="hasRole('ROLE_ADMIN')"> - Agent</span></dt><dd class="col-sm-5" th:text="${item.minimalOrderAgent}"></dd>
+                                            </th:block>
+                                            <dt class="col-sm-7">In stock</dt><dd class="col-sm-5" th:text="${item.stockCount}"></dd>
+                                            <dt class="col-sm-7">Lead time</dt><dd class="col-sm-5" th:text="${item.leadTime}"></dd>
+                                        </dl>
+                                        <p class="card-text" th:text="${item.description}"></p>
+                                        <p><a href="#" class="btn btn-primary">Add to card</a></p>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -56,8 +72,12 @@
                 Quick Links
             </h6>
             <div class="element-box-tp">
-                <div class="el-buttons-list full-width">
-                    <button class="btn btn-outline-primary btn-block" type="button" data-target="#onboardingWideFormModal" data-toggle="modal"> <i class="fa fa-microchip mr-2"></i> Add new item</button>
+                <div class="el-buttons-list full-width" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <button class="btn btn-outline-primary btn-block" type="button" data-target="#newItemModel" data-toggle="modal"> <i class="fa fa-microchip mr-2"></i> Add new merchandise</button>
+                </div>
+
+                <div class="el-buttons-list full-width" sec:authorize="!hasRole('ROLE_ADMIN')">
+                    <button class="btn btn-outline-primary btn-block" type="button" data-target="#itemRequestModel" data-toggle="modal"> <i class="fa fa-microchip mr-2"></i> Request new merchandise</button>
                 </div>
             </div>
         </div>
@@ -66,7 +86,7 @@
     END - Sidebar
     -------------------->
 
-    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingWideFormModal" role="dialog" tabindex="-1">
+    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="newItemModel" role="dialog" tabindex="-1" sec:authorize="hasRole('ROLE_ADMIN')">
         <div class="modal-dialog modal-lg modal-centered" role="document">
             <div class="modal-content text-center">
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="close-label">Cancel</span><span class="os-icon os-icon-close"></span></button>
@@ -79,20 +99,21 @@
                             Add new Item
                         </h4>
                         <div class="onboarding-text">
-                            Provide detailed information of new item here. there and where
+                            Item image size must be 286x180, and only allow one image per item
                         </div>
-                        <form>
+                        <form id="formNewItem" th:action="@{/data/system/item/add}" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Item Name</label><input class="form-control" placeholder="Item name..." type="text" value=""/>
+                                        <label for="">Item Name</label><input name="name" class="form-control" placeholder="Item name..." type="text" value="" required="required" data-error="Item name is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Category</label><select class="form-control">
+                                        <label for="">Category</label><select class="form-control" name="category">
                                         <option>
                                             Web Developer
                                         </option>
@@ -109,38 +130,58 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="">Customer Price (USD $)</label><input class="form-control"  type="number" value=""/>
+                                        <label for="">Customer Price (USD $)</label><input name="customerPrice" class="form-control"  type="number" value="" required="required" data-error="Price is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="">Agent Price (USD $)</label><input class="form-control"  type="number" value=""/>
+                                        <label for="">Agent Price (USD $)</label><input name="agentPrice" class="form-control"  type="number" value="" required="required" data-error="Price is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="">In Stock</label><input class="form-control"  type="number" value=""/>
+                                        <label for="">In Stock</label><input name="stockCount" class="form-control"  type="number" value="" required="required" data-error="Qty is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="">MOQ</label><input class="form-control"  type="number" value=""/>
+                                        <label for="">Lead time (Days)</label><input name="leadTime" class="form-control"  type="number" value="" required="required" data-error="Lead is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">MOQ (Customer)</label><input name="moqCustomer" class="form-control"  type="number" value="" required="required" data-error="MOQ is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">MOQ (Agent)</label><input name="moqAgent" class="form-control"  type="number" value="" required="required" data-error="MOQ is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Item Image URL</label><input class="form-control" placeholder="Item image URL..." type="text" value=""/>
+                                        <label for="">Item Image URL</label><input name="imageUrl" class="form-control" placeholder="Item image URL..." type="url" value="" required="required" data-error="Image is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Item Description</label><textarea class="form-control" placeholder="Item description..."  value="" cols="3"></textarea>
+                                        <label for="">Item Description</label><textarea name="description" class="form-control" placeholder="Item description..."  value="" cols="3" required="required" data-error="Description is required"></textarea>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
                             </div>
@@ -148,6 +189,76 @@
                                 <div class="col-sm-8"></div>
                                 <div class="col-sm-4">
                                     <button class="btn btn-primary" type="submit"> Create new item </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="itemRequestModel" role="dialog" tabindex="-1" sec:authorize="!hasRole('ROLE_ADMIN')">
+        <div class="modal-dialog modal-lg modal-centered" role="document">
+            <div class="modal-content text-center">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="close-label">Cancel</span><span class="os-icon os-icon-close"></span></button>
+                <div class="onboarding-side-by-side">
+                    <div class="onboarding-media">
+                        <img alt="" src="/img/bigicon5.png" width="200px">
+                    </div>
+                    <div class="onboarding-content with-gradient">
+                        <h4 class="onboarding-title">
+                            Request new Item
+                        </h4>
+                        <div class="onboarding-text">
+                            Having merchandises that not in our list, request here, we will response within 5 business days
+                        </div>
+                        <form id="formItemRequest" th:action="@{/date/shop/item/request}" method="post">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Item Name</label><input name="name" class="form-control" placeholder="Item name..." type="text" value="" required="required" data-error="Item name is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Item URL</label><input name="itemUrl" class="form-control" placeholder="Item URL..." type="url" value="" required="required" data-error="URL is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> Target price (USD $)</label><input name="targetPrice" class="form-control"  type="number" value="" required="required" data-error="Target price is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">Target order qty</label><input name="targetQty" class="form-control"  type="number" value="" required="required" data-error="Target qty is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Description</label><textarea name="description" class="form-control" placeholder="Request description..."  value="" cols="4"></textarea>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8"></div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary" type="submit"> Request new item </button>
                                 </div>
                             </div>
                         </form>

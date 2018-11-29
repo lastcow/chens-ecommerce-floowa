@@ -5,9 +5,7 @@ import me.chen.floowa.model.Role;
 import me.chen.floowa.model.User;
 import me.chen.floowa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -41,4 +39,5 @@ public class DataController {
 
         return userDtoList;
     }
+
 }

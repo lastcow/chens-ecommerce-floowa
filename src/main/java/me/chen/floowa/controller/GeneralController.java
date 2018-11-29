@@ -26,11 +26,6 @@ public class GeneralController {
         return "dashboard";
     }
 
-    @GetMapping(value = "/admin/shop")
-    public String shop(){
-        return "shop";
-    }
-
     @GetMapping(value = "/admin/users")
     public String users(){
         return "users";

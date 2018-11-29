@@ -17,13 +17,14 @@ public class Merchandise {
 
     private String name;
     private String description;
-    private String picUrl;
+    private String imgUrl;
     private float priceRetail;
     private float priceCustomer;
     private float priceAgent;
     private int minimalOrderCustomer;
     private int minimalOrderAgent;
     private int stockCount;
+    private int leadTime;                   // Days
     private Date startAvailableDate;
     private Date endAvailableDate;
     private boolean selfWarranty;           // Help replace with distributor
