@@ -31,40 +31,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Card title<span class="pull-right h6 font-weight-light">$ 459.99</span> </h5>
                                         <p class="card-text">Ship to HongKong.</p>
-                                        <p><a href="#" class="btn btn-primary">Go somewhere</a><span class="h7 font-weight-light pull-right pt-1">MOQ: 40</span></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 p-1" >
-                                <div class="card">
-                                    <img class="card-img-top" src="http://res.cloudinary.com/chenscorp/image/upload/c_fill,h_180,w_286/v1525480937/e-commerice/91w4iBgHaRL._SX679_.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <p><a href="#" class="btn btn-primary">Go somewhere</a><span class="h7 font-weight-light pull-right pt-1 text-danger">MOQ: 40</span></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class=" col-md-3 p-1" >
-                                <div class="card">
-                                    <img class="card-img-top" src="http://res.cloudinary.com/chenscorp/image/upload/c_fill,h_180,w_286/v1525480937/e-commerice/91w4iBgHaRL._SX679_.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class=" col-md-3 p-1" >
-                                <div class="card">
-                                    <img class="card-img-top" src="http://res.cloudinary.com/chenscorp/image/upload/c_fill,h_180,w_286/v1525480937/e-commerice/91w4iBgHaRL._SX679_.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <p>In stock:<span class="pull-right">12</span> </p>
+                                        <p><a href="#" class="btn btn-primary">Add to card</a><span class="h7 font-weight-light pull-right pt-1 text-danger">MOQ: 40</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +57,7 @@
             </h6>
             <div class="element-box-tp">
                 <div class="el-buttons-list full-width">
-                    <button class="btn btn-outline-primary btn-block" type="button"><i class="fa fa-user-plus"></i> Invite User</button>
+                    <button class="btn btn-outline-primary btn-block" type="button" data-target="#onboardingWideFormModal" data-toggle="modal"> <i class="fa fa-microchip mr-2"></i> Add new item</button>
                 </div>
             </div>
         </div>
@@ -97,5 +65,97 @@
     <!--------------------
     END - Sidebar
     -------------------->
+
+    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingWideFormModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-centered" role="document">
+            <div class="modal-content text-center">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="close-label">Cancel</span><span class="os-icon os-icon-close"></span></button>
+                <div class="onboarding-side-by-side">
+                    <div class="onboarding-media">
+                        <img alt="" src="/img/bigicon5.png" width="200px">
+                    </div>
+                    <div class="onboarding-content with-gradient">
+                        <h4 class="onboarding-title">
+                            Add new Item
+                        </h4>
+                        <div class="onboarding-text">
+                            Provide detailed information of new item here. there and where
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Item Name</label><input class="form-control" placeholder="Item name..." type="text" value=""/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Category</label><select class="form-control">
+                                        <option>
+                                            Web Developer
+                                        </option>
+                                        <option>
+                                            Business Owner
+                                        </option>
+                                        <option>
+                                            Other
+                                        </option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">Customer Price (USD $)</label><input class="form-control"  type="number" value=""/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">Agent Price (USD $)</label><input class="form-control"  type="number" value=""/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">In Stock</label><input class="form-control"  type="number" value=""/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">MOQ</label><input class="form-control"  type="number" value=""/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Item Image URL</label><input class="form-control" placeholder="Item image URL..." type="text" value=""/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Item Description</label><textarea class="form-control" placeholder="Item description..."  value="" cols="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8"></div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary" type="submit"> Create new item </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </th:block>
 </html>
