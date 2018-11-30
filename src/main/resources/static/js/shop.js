@@ -25,6 +25,13 @@ $(function(){
         $('#formItemRequest')[0].reset();
     });
 
-
-
 });
+
+function showAddToCartModal(name, image, moq){
+    // Set name
+    $('#titleAddToCart').html(name);
+    // Set image
+    $('#imgAddToCart').attr('src', image);
+
+    $('#addToCartModal').modal('show');
+}
