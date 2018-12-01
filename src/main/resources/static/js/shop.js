@@ -32,6 +32,9 @@ function showAddToCartModal(name, image, moq){
     $('#titleAddToCart').html(name);
     // Set image
     $('#imgAddToCart').attr('src', image);
+    // Set MOQ
+    $('#addToCartOrderCount').val(moq);
 
     $('#addToCartModal').modal('show');
+
 }

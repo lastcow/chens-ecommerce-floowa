@@ -32,7 +32,8 @@
                                         <div class="pi-controls">
                                             <!--<div class="status" th:classappend="${item.active} ? 'status-green' : 'status-red'" data-placement="top" data-toggle="tooltip" th:title="${item.active} ? 'Active' : 'DeActive'"></div>-->
                                             <div class="status" data-placement="top" data-toggle="tooltip" title="Add to card">
-                                                <a th:onclick="|showAddToCartModal('${item.name}', '${item.imgUrl}', '${item.minimalOrderAgent}')|"><i class="fa fa-shopping-cart"></i> </a></div>
+                                                <a th:attr="onclick=|showAddToCartModal('${item.name}','${item.imgUrl}', ${item.minimalOrderCustomer})|"><i class="fa fa-shopping-cart"></i> </a>
+                                            </div>
                                         </div>
                                         <div class="pi-body">
                                             <div class="avatar">
@@ -304,7 +305,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="">Order Quantity</label><input class="form-control" type="number" value="">
+                                    <label for="">Order Quantity</label><input id="addToCartOrderCount" class="form-control" type="number" value="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
