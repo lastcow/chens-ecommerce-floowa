@@ -2,9 +2,11 @@ package me.chen.floowa.model;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.EAN;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,5 +37,8 @@ public class Merchandise {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private ShopCategory shopCategory;
+
+    @OneToMany(mappedBy = "merchandise")
+    private List<CartItem> cartItems;
 
 }

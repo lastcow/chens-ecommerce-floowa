@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MerchandiseService {
@@ -33,6 +34,15 @@ public class MerchandiseService {
         merchandise.setActive(true);
 
         return merchandiseRepository.save(merchandise);
+    }
+
+    /**
+     * return merchandise by id.
+     * @param id
+     * @return
+     */
+    public Optional<Merchandise> findById(String id){
+        return merchandiseRepository.findById(id);
     }
 
     public List<Merchandise> findAll(){
