@@ -81,24 +81,44 @@ public class ShopController {
         ShoppingCart shoppingCart = shoppingcartService.findByUserName(username);
 
         ShoppingCartDto shoppingCartDto = new ShoppingCartDto();
+        shoppingCartDto.setId(shoppingCart.getId());
+
 
         // Convert cart item to cartItemDto
         List<CartItemDto> cartItemDtos = new ArrayList<>();
-        shoppingCart.getCartItems().forEach(cartItem -> {
-            CartItemDto cartItemDto = new CartItemDto();
-            cartItemDto.setId(cartItem.getId());
-            cartItemDto.setTitle(cartItem.getMerchandise().getName());
-            cartItemDto.setImgUrl(cartItem.getMerchandise().getImgUrl());
-            cartItemDto.setQty(cartItem.getQty());
-            cartItemDto.setUnitPrice(cartItem.getPrice());
+        if(shoppingCart == null){
+            // Do nothing
+        }else {
+            shoppingCart.getCartItems().forEach(cartItem -> {
+                CartItemDto cartItemDto = new CartItemDto();
+                cartItemDto.setId(cartItem.getId());
+                cartItemDto.setTitle(cartItem.getMerchandise().getName());
+                cartItemDto.setImgUrl(cartItem.getMerchandise().getImgUrl());
+                cartItemDto.setQty(cartItem.getQty());
+                cartItemDto.setUnitPrice(cartItem.getPrice());
 
-            cartItemDtos.add(cartItemDto);
-        });
+                cartItemDtos.add(cartItemDto);
+            });
+        }
 
         shoppingCartDto.setCartItemDtos(cartItemDtos);
 
         modelMap.addAttribute("cart", shoppingCartDto);
 
         return "shoppingcart";
+    }
+
+
+    /**
+     * Convert shopping cart to invoice that visible to all agents.
+     * @param payroll
+     * @return
+     */
+    @PostMapping(value = "/admin/convertcarttoinvoice")
+    @ResponseBody
+    public boolean convertCartToInvoice(@RequestBody Map<String, Object> payroll){
+        boolean success = false;
+
+        return success;
     }
 }

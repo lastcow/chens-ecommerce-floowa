@@ -139,10 +139,10 @@
                                             <h7>Shipping: </h7>
                                         </div>
                                         <div class="col-md-6 text-right">
-                                            <h6>Will calculated</h6>
+                                            <h6>Pending</h6>
                                         </div>
                                     </div>
-                                    <button class="mt-3 btn btn-block btn-danger" style="height: 40px;">CONFIRM YOUR ORDER</button>
+                                    <button th:attr="onclick=|confirmOrder('${cart.id}')|" class="mt-3 btn btn-block btn-danger" style="height: 40px;">SUBMIT YOUR ORDER</button>
                                 </div>
                             </div>
                         </div>
@@ -172,5 +172,38 @@
     <!--------------------
     END - Sidebar
     -------------------->
+
+    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="cartConfirm" role="dialog" tabindex="-1" data-backdrop="false">
+        <div class="modal-dialog modal-centered" role="document">
+            <div class="modal-content text-center">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="close-label">Close</span><span class="os-icon os-icon-close"></span></button>
+                <div class="onboarding-media">
+                    <img id="imgAddToCartSuccess" alt="" src="/img/bigicon5.png" width="200px">
+                </div>
+                <div class="onboarding-content with-gradient">
+                    <h4 class="onboarding-title">
+                        Order submitted successfully
+                    </h4>
+                    <div class="onboarding-text">
+                        One of the agent will contact you shortly with updated shipping cost based on your shipping address.
+                    </div>
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <a th:href="@{/admin/shop}" class="form-control btn btn-primary upper">CONTINUE SHOPPING</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <a th:href="@{/admin/invoice}" class="btn btn-dark form-control upper">SHOW INVOICE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </th:block>
 </html>

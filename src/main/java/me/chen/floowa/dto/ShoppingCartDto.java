@@ -8,5 +8,6 @@ import java.util.List;
 public class ShoppingCartDto {
 
     private String id;
+    private String comments;
     private List<CartItemDto> cartItemDtos;
 }

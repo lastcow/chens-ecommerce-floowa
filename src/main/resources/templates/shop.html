@@ -26,7 +26,7 @@
                     </h6>
                     <div class="element-content">
                         <div class="row">
-                            <div class="col-sm-4" th:each="item : ${items}">
+                            <div class="col-sm-4 mt-3" th:each="item : ${items}">
                                 <div class="pipeline-body">
                                     <div class="pipeline-item">
                                         <div class="pi-controls">
@@ -349,7 +349,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <a href="/admin/shoppingcart" class="btn btn-dark form-control upper">GOTO SHOPPING CART</a>
+                                    <a th:href="@{/admin/shoppingcart}" class="btn btn-dark form-control upper">GOTO SHOPPING CART</a>
                                 </div>
                             </div>
                         </div>
