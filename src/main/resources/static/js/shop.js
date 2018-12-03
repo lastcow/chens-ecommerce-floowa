@@ -79,6 +79,10 @@ function submitAddToCart(){
                     $('#addToCartModal').modal('hide');
                     // Show success message dialog
                     $('#addToCartModalSuccess').modal('show');
+
+                    if(updateShoppingCartTotal){
+                        updateShoppingCartTotal();
+                    }
                 },
                 error: function(){
 

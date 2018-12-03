@@ -24,7 +24,7 @@ public class ShoppingCart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<CartItem> cartItems;
 
 }

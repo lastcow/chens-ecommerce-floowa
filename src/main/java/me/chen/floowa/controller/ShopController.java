@@ -1,9 +1,13 @@
 package me.chen.floowa.controller;
 
+import me.chen.floowa.dto.CartItemDto;
 import me.chen.floowa.dto.RequestItemDto;
+import me.chen.floowa.dto.ShoppingCartDto;
 import me.chen.floowa.model.Merchandise;
+import me.chen.floowa.model.ShoppingCart;
 import me.chen.floowa.service.MerchandiseRequestedService;
 import me.chen.floowa.service.MerchandiseService;
+import me.chen.floowa.service.ShoppingcartService;
 import me.chen.floowa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +31,8 @@ public class ShopController {
     MerchandiseRequestedService merchandiseRequestedService;
     @Autowired
     UserService userService;
+    @Autowired
+    ShoppingcartService shoppingcartService;
 
     @GetMapping(value = "/admin/shop")
     public String shop(ModelMap modelMap)
@@ -58,5 +65,40 @@ public class ShopController {
         return userService.addItemToShoppingCart(userName,
                 payload.get("itemId").toString(),
                 Integer.parseInt(payload.get("orderQty").toString()));
+    }
+
+    /**
+     * Shopping cart page
+     * @param modelMap
+     * @param principal
+     * @return
+     */
+    @GetMapping(value = "/admin/shoppingcart")
+    public String shoppingCart(ModelMap modelMap, Principal principal){
+
+        // Get my shopping cart
+        String username = principal.getName();
+        ShoppingCart shoppingCart = shoppingcartService.findByUserName(username);
+
+        ShoppingCartDto shoppingCartDto = new ShoppingCartDto();
+
+        // Convert cart item to cartItemDto
+        List<CartItemDto> cartItemDtos = new ArrayList<>();
+        shoppingCart.getCartItems().forEach(cartItem -> {
+            CartItemDto cartItemDto = new CartItemDto();
+            cartItemDto.setId(cartItem.getId());
+            cartItemDto.setTitle(cartItem.getMerchandise().getName());
+            cartItemDto.setImgUrl(cartItem.getMerchandise().getImgUrl());
+            cartItemDto.setQty(cartItem.getQty());
+            cartItemDto.setUnitPrice(cartItem.getPrice());
+
+            cartItemDtos.add(cartItemDto);
+        });
+
+        shoppingCartDto.setCartItemDtos(cartItemDtos);
+
+        modelMap.addAttribute("cart", shoppingCartDto);
+
+        return "shoppingcart";
     }
 }

@@ -95,11 +95,28 @@ public class UserService {
                 price = -1;
         }
 
-        CartItem cartItem = new CartItem();
-        cartItem.setMerchandise(merchandise.get());
-        cartItem.setPrice(price);
-        cartItem.setQty(qty);
-        cartItem.setShoppingCart(shoppingCart);
+        // Check whether cartItem already in shopping cart?
+        Optional<CartItem> existingCartItem = Optional.empty();
+        if(shoppingCart.getCartItems() != null) {
+            existingCartItem = shoppingCart.getCartItems().stream().filter(item -> item.getMerchandise().getId().equalsIgnoreCase(selectedMerchandise.getId())).findAny();
+        }
+
+        CartItem cartItem;
+
+        if(existingCartItem.isPresent()){
+            // Add number to existing cart item
+            cartItem = existingCartItem.get();
+            cartItem.setQty(cartItem.getQty() + qty);
+            cartItem.setPrice(price);                           // Reset price here because price may changed during shopping cart added (shopping cart last forever until delete or convert to Invoice).
+        }else {
+
+            cartItem = new CartItem();
+            cartItem.setMerchandise(selectedMerchandise);
+            cartItem.setPrice(price);
+            cartItem.setQty(qty);
+            cartItem.setShoppingCart(shoppingCart);
+        }
+        // Save to database
         cartItemService.save(cartItem);
 
         // Set update date of shopping cart

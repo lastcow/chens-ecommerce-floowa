@@ -17,5 +17,23 @@ $(function(){
         success: function(data){
             $('#main_menu_items_count').html(data + ' Items');
         }
-    })
+    });
+
+    updateShoppingCartTotal();
+
+
 });
+
+/**
+ * Update my shopping cart
+ */
+function updateShoppingCartTotal(){
+    // Get shopping cart total items
+    $.ajax({
+        method: 'POST',
+        url: '/data/statistics/totalinshoppingcart',
+        success: function(data){
+            $('#scTotal').html(data);
+        }
+    });
+}
