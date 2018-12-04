@@ -8,11 +8,21 @@ $(function(){
 });
 
 /**
+ * Make order submission button disabled.
+ */
+function updateItemQty(){
+    // Disable order submission button.
+    $('#btnSubmitOrder').attr('disabled', 'disabled');
+}
+
+/**
  * Confirm order from shopping cart
  * @param cartId
  */
 function confirmOrder(cartId){
     console.log(cartId);
+    var $this = $('#btnSubmitOrder');
+    $this.html("Processing Order");
 
     // Convert shopping cart to invoice
     $.ajax({
@@ -23,6 +33,8 @@ function confirmOrder(cartId){
         contentType: 'application/json',
         success: function(data){
             // Show modal and display the loading status
+            $this.text('Order Processed');
+            $this.attr('disabled', 'disabled');
             $('#cartConfirm').modal('show');
         },
         error: function(){

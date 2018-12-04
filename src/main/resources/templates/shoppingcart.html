@@ -24,8 +24,10 @@
                         Shopping Cart
                     </h6>
                     <div class="element-content">
-                        <div class="element-box">
-                            <form th:object="${cart}" method="post">
+                        <form th:object="${cart}" method="post" th:action="@{/admin/updateorderqty}">
+                            <input type="hidden" th:field="${cart.id}">
+                            <div class="element-box">
+
                                 <div class="table-responsive">
                                 <!--------------------
                                 START - Shooping Cart Table
@@ -52,6 +54,7 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="item, stat : ${cart.cartItemDtos}">
+                                        <input type="hidden" th:field="${cart.cartItemDtos[__${stat.index}__].id}">
                                         <td class="cell-with-media">
                                             <img th:src="${item.imgUrl}" style="height: 25px;">
                                             <span th:text="${item.title}" class="ml-2"></span>
@@ -60,7 +63,7 @@
                                             <span th:text="${#numbers.formatCurrency(item.unitPrice)}"></span>
                                         </td>
                                         <td class="text-center">
-                                            <input class="form-control" type="number" th:field="${cart.cartItemDtos[__${stat.index}__].qty}">
+                                            <input onchange="updateItemQty()" class="form-control" type="number" th:field="${cart.cartItemDtos[__${stat.index}__].qty}">
                                         </td>
                                         <td class="text-center">
                                             <span th:text="${#numbers.formatCurrency(item.unitPrice * item.qty)}"></span>
@@ -76,23 +79,22 @@
                                 -------------------->
 
                                 </div>
-                            </form>
-                        </div>
-                        <div class="element-box" style="margin-top: -10px;">
-                            <div class="row">
-                                <div class="col">
-                                    <a href="javascript:;" class="btn btn-outline-dark" style="text-decoration-line: none;">CONTINUE SHOPPING</a>
-                                </div>
-                                <div class="col-md-auto">
-                                    <a href="javascript:;" class="btn btn-outline-dark pull-right" style="text-decoration-line: none;">UPDATE SHOPPING CART</a>
-                                </div>
-                                <div class="col-md-auto">
-                                    <a href="javascript:;" class="btn btn-outline-danger pull-right" style="text-decoration-line: none;">CLEAR SHOPPING CART</a>
-                                </div>
-
                             </div>
-                        </div>
+                            <div class="element-box" style="margin-top: -10px;">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="javascript:;" class="btn btn-outline-dark" style="text-decoration-line: none;">CONTINUE SHOPPING</a>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <button class="btn btn-outline-dark pull-right"  type="submit">UPDATE SHOPPING CART</button>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <a href="javascript:;" class="btn btn-outline-danger pull-right" style="text-decoration-line: none;">CLEAR SHOPPING CART</a>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </form>
                         <div class="element-box" style="margin-top: -10px;">
                             <div class="row">
                                 <div class="col-md-4">
@@ -142,7 +144,12 @@
                                             <h6>Pending</h6>
                                         </div>
                                     </div>
-                                    <button th:attr="onclick=|confirmOrder('${cart.id}')|" class="mt-3 btn btn-block btn-danger" style="height: 40px;">SUBMIT YOUR ORDER</button>
+                                    <button th:attr="onclick=|confirmOrder('${cart.id}')|"
+                                            type="button"
+                                            class="mt-3 btn btn-block btn-danger"
+                                            style="height: 40px;"
+                                            id="btnSubmitOrder"
+                                            >SUBMIT YOUR ORDER</button>
                                 </div>
                             </div>
                         </div>
