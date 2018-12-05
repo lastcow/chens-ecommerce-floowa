@@ -9,5 +9,6 @@ public class ShoppingCartDto {
 
     private String id;
     private String comments;
+    private String shipTo;
     private List<CartItemDto> cartItemDtos;
 }
