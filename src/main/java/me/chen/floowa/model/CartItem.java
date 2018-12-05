@@ -24,4 +24,8 @@ public class CartItem {
     @ManyToOne
     @JoinColumn(name = "merchandise_id")
     private Merchandise merchandise;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private MerchandiseOrder merchandiseOrder;
 }

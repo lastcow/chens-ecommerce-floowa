@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,4 +35,10 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = true)
     private ShoppingCart shoppingCart;
+
+    @OneToMany(mappedBy = "agent")
+    private List<MerchandiseOrder> agentOrders;
+
+    @OneToMany(mappedBy = "customer")
+    private List<MerchandiseOrder> merchandiseOrders;
 }
