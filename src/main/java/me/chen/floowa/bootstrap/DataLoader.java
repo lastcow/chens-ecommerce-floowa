@@ -70,6 +70,20 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         user.setRole(role);
         userService.create(user);
 
+        role = roleService.create("ROLE_SUPPLIER", "Supplier");
+        user = new User();
+        user.setUsername("lastcow3");
+        user.setPassword(passwordEncoder.encode("abc"));
+        user.setEmail("ebiz3@chen.me");
+        user.setContactNumber("301-338 3398");
+        user.setWechat("Chens LLC");
+        user.setQq("13948");
+        user.setFirstName("John");
+        user.setLastName("Steve");
+        user.setActive(true);
+        user.setRole(role);
+        userService.create(user);
+
         // Add coupon
         CouponNvidia couponNvidia = new CouponNvidia();
         couponNvidia.setCode("7xq7vbnow");
