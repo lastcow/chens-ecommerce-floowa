@@ -5,10 +5,7 @@ import me.chen.floowa.dto.RequestItemDto;
 import me.chen.floowa.dto.ShoppingCartDto;
 import me.chen.floowa.model.Merchandise;
 import me.chen.floowa.model.ShoppingCart;
-import me.chen.floowa.service.MerchandiseRequestedService;
-import me.chen.floowa.service.MerchandiseService;
-import me.chen.floowa.service.ShoppingcartService;
-import me.chen.floowa.service.UserService;
+import me.chen.floowa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +27,8 @@ public class ShopController {
     UserService userService;
     @Autowired
     ShoppingcartService shoppingcartService;
+    @Autowired
+    CartItemService cartItemService;
 
     @GetMapping(value = "/admin/shop")
     public String shop(ModelMap modelMap)
@@ -112,10 +111,14 @@ public class ShopController {
      * @return
      */
     @PostMapping(value = "/admin/updateorderqty")
-    @ResponseBody
-    public boolean updateOrderQty(@ModelAttribute ShoppingCartDto shoppingCartDto){
+    public String updateOrderQty(@ModelAttribute ShoppingCartDto shoppingCartDto){
 
-        return false;
+        // Update shopping cart item
+        shoppingCartDto.getCartItemDtos().forEach(cartItemDto -> {
+            cartItemService.updateQty(cartItemDto.getId(), cartItemDto.getQty());
+        });
+
+        return "redirect:/admin/shoppingcart";
     }
 
 

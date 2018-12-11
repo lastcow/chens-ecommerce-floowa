@@ -8,7 +8,7 @@
 </head>
 <body>
 <th:block layout:fragment="script">
-    <script th:src="@{/js/shoppingcart.js}"></script>
+    <script th:src="@{/js/order.js}"></script>
 </th:block>
 </body>
 <th:block layout:fragment="content">
@@ -21,80 +21,77 @@
                         </dev>
                     </div>
                     <h6 class="element-header">
-                        Shopping Cart
+                        Pending Orders
                     </h6>
                     <div class="element-content">
-                        <form th:object="${cart}" method="post" th:action="@{/admin/updateorderqty}">
-                            <input type="hidden" th:field="${cart.id}">
-                            <div class="element-box">
+                        <div class="element-box">
 
-                                <div class="table-responsive">
-                                <!--------------------
-                                START - Shooping Cart Table
-                                -------------------->
-                                    <table class="table table-lightborder">
-                                    <thead>
-                                    <tr>
-                                        <th width="30%">
-                                            Product
-                                        </th>
-                                        <th class="text-center" width="10%">
-                                            Unit Price
-                                        </th>
-                                        <th class="text-center" width="8%">
-                                            Quantity
-                                        </th>
-                                        <th class="text-center" width="15%">
-                                            Subtotal
-                                        </th>
-                                        <th class="text-center" width="10%">
-                                            Remove
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="item, stat : ${cart.cartItemDtos}">
-                                        <input type="hidden" th:field="${cart.cartItemDtos[__${stat.index}__].id}">
-                                        <td class="cell-with-media">
-                                            <img th:src="${item.imgUrl}" style="height: 25px;">
-                                            <span th:text="${item.title}" class="ml-2"></span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span th:text="${#numbers.formatCurrency(item.unitPrice)}"></span>
-                                        </td>
-                                        <td class="text-center">
-                                            <input onchange="updateItemQty()" class="form-control" type="number" th:field="${cart.cartItemDtos[__${stat.index}__].qty}">
-                                        </td>
-                                        <td class="text-center">
-                                            <span th:text="${#numbers.formatCurrency(item.unitPrice * item.qty)}"></span>
-                                        </td>
-                                        <td class="text-center">
-                                            Delete
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!--------------------
-                                END - Shopping Cart Table
-                                -------------------->
+                            <div class="table-responsive">
+                            <!--------------------
+                            START - Shooping Cart Table
+                            -------------------->
+                                <table class="table table-lightborder">
+                                <thead>
+                                <tr>
+                                    <th width="30%">
+                                        Order ID
+                                    </th>
+                                    <th class="text-center" width="10%">
+                                        Item Quantity
+                                    </th>
+                                    <th class="text-center" width="15%">
+                                        Subtotal
+                                    </th>
+                                    <th class="text-center" width="20%">
+                                        Fill Progress
+                                    </th>
+                                    <th class="text-center" width="10%">
+                                        Action
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="item, stat : ${cart.cartItemDtos}">
+                                    <input type="hidden" th:field="${cart.cartItemDtos[__${stat.index}__].id}">
+                                    <td class="cell-with-media">
+                                        <img th:src="${item.imgUrl}" style="height: 25px;">
+                                        <span th:text="${item.title}" class="ml-2"></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span th:text="${#numbers.formatCurrency(item.unitPrice)}"></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <input onchange="updateItemQty()" class="form-control" type="number" th:field="${cart.cartItemDtos[__${stat.index}__].qty}">
+                                    </td>
+                                    <td class="text-center">
+                                        <span th:text="${#numbers.formatCurrency(item.unitPrice * item.qty)}"></span>
+                                    </td>
+                                    <td class="text-center">
+                                        Delete
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!--------------------
+                            END - Shopping Cart Table
+                            -------------------->
 
-                                </div>
                             </div>
-                            <div class="element-box" style="margin-top: -10px;">
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="javascript:;" class="btn btn-outline-dark" style="text-decoration-line: none;">CONTINUE SHOPPING</a>
-                                    </div>
-                                    <div class="col-md-auto">
-                                        <button class="btn btn-outline-dark pull-right"  type="submit">UPDATE SHOPPING CART</button>
-                                    </div>
-                                    <div class="col-md-auto">
-                                        <a href="javascript:;" class="btn btn-outline-danger pull-right" style="text-decoration-line: none;">CLEAR SHOPPING CART</a>
-                                    </div>
-
+                        </div>
+                        <div class="element-box" style="margin-top: -10px;">
+                            <div class="row">
+                                <div class="col">
+                                    <a href="javascript:;" class="btn btn-outline-dark" style="text-decoration-line: none;">CONTINUE SHOPPING</a>
                                 </div>
+                                <div class="col-md-auto">
+                                    <button class="btn btn-outline-dark pull-right"  type="submit">UPDATE SHOPPING CART</button>
+                                </div>
+                                <div class="col-md-auto">
+                                    <a href="javascript:;" class="btn btn-outline-danger pull-right" style="text-decoration-line: none;">CLEAR SHOPPING CART</a>
+                                </div>
+
                             </div>
-                        </form>
+                        </div>
                         <div class="element-box" style="margin-top: -10px;">
                             <div class="row">
                                 <div class="col-md-4">
