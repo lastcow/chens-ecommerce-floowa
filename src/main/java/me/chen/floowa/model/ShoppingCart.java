@@ -17,6 +17,7 @@ public class ShoppingCart {
     private String id;
 
     private String status;      // Pending, Paid, Shipped
+    private boolean agentOnly;  // Is this purchase only allow agent response? If false, then only facing supplier.
     private Date updateAt;
     private Date createdAt;
 
@@ -26,5 +27,9 @@ public class ShoppingCart {
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<CartItem> cartItems;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
 }

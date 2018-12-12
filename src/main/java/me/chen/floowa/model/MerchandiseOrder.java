@@ -15,6 +15,12 @@ public class MerchandiseOrder {
     @GenericGenerator(name="system-uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
+    /**
+     * OrderId used to display on web and for reference.
+     */
+    @Column(unique = true)
+    private String orderId;
+
     @OneToMany(mappedBy = "merchandiseOrder", fetch = FetchType.EAGER)
     private List<CartItem> orderItems;
 
