@@ -14,6 +14,7 @@ public class Address {
     @GenericGenerator(name="system-uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
+    private String name;
     private String country;
     private String state;
     private String city;

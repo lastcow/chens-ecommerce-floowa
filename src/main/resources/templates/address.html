@@ -37,37 +37,22 @@
                                         </div>
                                         <div class="pi-body">
                                             <div class="avatar">
-                                                <img alt="" th:src="${item.imgUrl}">
+                                                <img alt="" th:src="${address.name}">
                                             </div>
                                             <div class="pi-info">
                                                 <div class="h6 pi-name">
-                                                    <span th:text="${item.name}"></span>
+                                                    <span th:text="${address.name}"></span>
                                                 </div>
                                                 <div class="pi-sub">
-                                                    <span th:text="${item.description}"></span>
+                                                    <span th:text="${address.address1}"></span>
+                                                    <span th:text="${address.address2}"></span>
+                                                    <span th:text="${address.city + ', ' + address.state + ' ' + address.postcode}"></span>
+                                                    <span th:text="${address.country}"></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="pi-foot">
-                                            <div class="tags">
-                                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                                    <span class="tag" th:text="'Price - A: ' + ${#numbers.formatCurrency(item.priceAgent)}"></span>
-                                                    <span class="tag" th:text="'MOQ - A: ' + ${item.minimalOrderAgent}"></span>
-                                                    <span class="tag" th:text="'Price - C: ' + ${#numbers.formatCurrency(item.priceCustomer)}"></span>
-                                                    <span class="tag" th:text="'MOQ - C : ' + ${item.minimalOrderCustomer}"></span>
-                                                </th:block>
-                                                <th:block sec:authorize="hasRole('ROLE_AGENT')">
-                                                    <span class="tag" th:text="'Price: ' + ${#numbers.formatCurrency(item.priceAgent)}"></span>
-                                                    <span class="tag" th:text="'MOQ: ' + ${item.minimalOrderAgent}"></span>
-                                                </th:block>
-                                                <th:block sec:authorize="hasRole('ROLE_CUSTOMER')">
-                                                    <span class="tag" th:text="'Price: ' + ${#numbers.formatCurrency(item.priceCustomer)}"></span>
-                                                    <span class="tag" th:text="'MOQ: ' + ${item.minimalOrderCustomer}"></span>
-                                                </th:block>
 
-                                                <span class="tag" th:classappend="${item.stockCount < 10} ? 'text-danger' : ''" th:text="'Stock: ' + ${item.stockCount}"></span>
-                                                <span class="tag" th:text="'Lead: ' + ${item.leadTime} + ' Days'"></span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
