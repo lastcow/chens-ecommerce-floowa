@@ -4,6 +4,7 @@ import me.chen.floowa.dto.OrderDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +26,10 @@ public class OrderController {
 
         modelMap.addAttribute("orders", orderDtos);
         return "orders";
+    }
+
+    @PostMapping(value = "/admin/order/submit")
+    public void submitOrder(){
+
     }
 }

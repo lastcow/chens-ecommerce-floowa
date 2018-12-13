@@ -5,6 +5,19 @@ $(function(){
     // Highlight menu
     $('#main_menu_shop').addClass('selected');
 
+    // Make form validator
+    if($('#formUpdateCart').length){
+        $('#formUpdateCart').validator();
+    }
+
+    // Display message
+    if(updateSuccess != null ){
+        if(updateSuccess[0] == 'true'){
+            // Display success message
+            $('.alert-success').fadeIn(100, function(){$(this).delay(4000).fadeOut(1500);});
+        }
+    }
+
 });
 
 /**

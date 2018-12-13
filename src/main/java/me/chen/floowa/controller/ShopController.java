@@ -3,18 +3,21 @@ package me.chen.floowa.controller;
 import me.chen.floowa.dto.CartItemDto;
 import me.chen.floowa.dto.RequestItemDto;
 import me.chen.floowa.dto.ShoppingCartDto;
+import me.chen.floowa.model.Address;
 import me.chen.floowa.model.Merchandise;
 import me.chen.floowa.model.ShoppingCart;
 import me.chen.floowa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ShopController {
@@ -29,6 +32,8 @@ public class ShopController {
     ShoppingcartService shoppingcartService;
     @Autowired
     CartItemService cartItemService;
+    @Autowired
+    AddressService addressService;
 
     @GetMapping(value = "/admin/shop")
     public String shop(ModelMap modelMap)
@@ -70,11 +75,14 @@ public class ShopController {
      * @return
      */
     @GetMapping(value = "/admin/shoppingcart")
-    public String shoppingCart(ModelMap modelMap, Principal principal){
+    public String shoppingCart(ModelMap modelMap, Principal principal, Authentication authentication){
 
         // Get my shopping cart
         String username = principal.getName();
+        Collection<? extends GrantedAuthority> grantedAuthorities = authentication.getAuthorities();
         ShoppingCart shoppingCart = shoppingcartService.findByUserName(username);
+
+        List<Address> addresses = addressService.findAddressesByUsername(username);
 
         ShoppingCartDto shoppingCartDto = new ShoppingCartDto();
         shoppingCartDto.setId(shoppingCart.getId());
@@ -92,6 +100,14 @@ public class ShopController {
                 cartItemDto.setImgUrl(cartItem.getMerchandise().getImgUrl());
                 cartItemDto.setQty(cartItem.getQty());
                 cartItemDto.setUnitPrice(cartItem.getPrice());
+                Optional<? extends GrantedAuthority> agentRole = grantedAuthorities.stream().filter(g ->
+                    ((GrantedAuthority) g).getAuthority().equalsIgnoreCase("ROLE_AGENT")).findAny();
+                if(agentRole.isPresent()){
+                    cartItemDto.setMoq(cartItem.getMerchandise().getMinimalOrderAgent());
+                }else{
+                    cartItemDto.setMoq(cartItem.getMerchandise().getMinimalOrderCustomer());
+                }
+//                cartItemDto.setMoq();
 
                 cartItemDtos.add(cartItemDto);
             });
@@ -99,7 +115,7 @@ public class ShopController {
 
         shoppingCartDto.setCartItemDtos(cartItemDtos);
 
-        modelMap.addAttribute("cart", shoppingCartDto);
+        modelMap.addAttribute("cart", shoppingCartDto).addAttribute("addresses", addresses);
 
         return "shoppingcart";
     }
@@ -111,12 +127,14 @@ public class ShopController {
      * @return
      */
     @PostMapping(value = "/admin/updateorderqty")
-    public String updateOrderQty(@ModelAttribute ShoppingCartDto shoppingCartDto){
+    public String updateOrderQty(@ModelAttribute ShoppingCartDto shoppingCartDto, RedirectAttributes redirectAttributes){
 
         // Update shopping cart item
         shoppingCartDto.getCartItemDtos().forEach(cartItemDto -> {
             cartItemService.updateQty(cartItemDto.getId(), cartItemDto.getQty());
         });
+
+        redirectAttributes.addAttribute("success", true);
 
         return "redirect:/admin/shoppingcart";
     }

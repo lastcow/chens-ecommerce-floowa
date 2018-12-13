@@ -11,6 +11,11 @@ public class CartItemDto {
     private float unitPrice;
     private int qty;
 
+    /**
+     * Minimal order qty
+     */
+    private int moq;
+
 }
 
 

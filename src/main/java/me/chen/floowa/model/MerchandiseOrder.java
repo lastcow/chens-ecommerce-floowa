@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,21 @@ public class MerchandiseOrder {
     @GenericGenerator(name="system-uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
+    private String comments;
+    private String purchaseFrom;
+    private String status;
+
+    /**
+     * Calculated on order only
+     */
+    private float shippingCost;
+
+    private Date createdAt;
+    private Date updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address shipToAddress;
     /**
      * OrderId used to display on web and for reference.
      */
@@ -33,5 +49,5 @@ public class MerchandiseOrder {
     @JoinColumn(name = "customer_id")
     private User customer;
 
-    private String status;
+
 }

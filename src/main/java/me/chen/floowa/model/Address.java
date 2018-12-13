@@ -3,9 +3,7 @@ package me.chen.floowa.model;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -23,5 +21,9 @@ public class Address {
     private String address2;
     private String company;
     private String postcode;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

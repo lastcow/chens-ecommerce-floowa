@@ -9,6 +9,7 @@ public class ShoppingCartDto {
 
     private String id;
     private String comments;
-    private String shipTo;
+    private String purchasefrom;
+    private String shipto;
     private List<CartItemDto> cartItemDtos;
 }
