@@ -22,6 +22,8 @@ public class Address {
     private String address2;
     private String company;
     private String postcode;
+    private String contact;
+    private String memo;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

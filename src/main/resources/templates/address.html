@@ -96,75 +96,16 @@
                     </div>
                     <div class="onboarding-content with-gradient">
                         <h4 class="onboarding-title">
-                            Add new Item
+                            Add new Address
                         </h4>
                         <div class="onboarding-text">
-                            Item image size must be 286x180, and only allow one image per item
+                            You can add any address here, no restriction, add what u like.
                         </div>
-                        <form id="formNewItem" th:action="@{/data/system/item/add}" method="post">
+                        <form id="formNewAddress" th:action="@{/data/address/add}" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Item Name</label><input name="name" class="form-control" placeholder="Item name..." type="text" value="" required="required" data-error="Item name is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="">Category</label><select class="form-control" name="category">
-                                        <option>
-                                            Web Developer
-                                        </option>
-                                        <option>
-                                            Business Owner
-                                        </option>
-                                        <option>
-                                            Other
-                                        </option>
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="">Customer Price (USD $)</label><input name="customerPrice" class="form-control"  type="number" value="" required="required" data-error="Price is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="">Agent Price (USD $)</label><input name="agentPrice" class="form-control"  type="number" value="" required="required" data-error="Price is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="">In Stock</label><input name="stockCount" class="form-control"  type="number" value="" required="required" data-error="Qty is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="">Lead time (Days)</label><input name="leadTime" class="form-control"  type="number" value="" required="required" data-error="Lead is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="">MOQ (Customer)</label><input name="moqCustomer" class="form-control"  type="number" value="" required="required" data-error="MOQ is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="">MOQ (Agent)</label><input name="moqAgent" class="form-control"  type="number" value="" required="required" data-error="MOQ is required"/>
+                                        <label for="">Full name</label><input name="name" class="form-control" placeholder="Full name..." type="text" value="" required="required" data-error="Full name is required"/>
                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
@@ -172,7 +113,38 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Item Image URL</label><input name="imageUrl" class="form-control" placeholder="Item image URL..." type="url" value="" required="required" data-error="Image is required"/>
+                                        <label for="">Street address</label><input name="address1" class="form-control"  type="text" value="" placeholder="Street and number, P.O. box, c/o." required="required" data-error="Street address is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="address2" class="form-control" type="text" value="" placeholder="Apartment, suite, unit, building, floor, etc" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">City</label><input name="city" class="form-control"  type="text" value="" required="required" data-error="Ci is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">State / Province / Region</label><input name="state" class="form-control"  type="text" value="" required="required" data-error="State is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">Zip Code</label><input name="postcode" class="form-control"  type="text" value="" required="required" data-error="Zip code is required"/>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">Phone number</label><input name="contact" class="form-control"  type="text" value="" />
                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
@@ -180,7 +152,15 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Item Description</label><textarea name="description" class="form-control" placeholder="Item description..."  value="" cols="3" required="required" data-error="Description is required"></textarea>
+                                        <label for="">Company</label><input name="company" class="form-control" placeholder="Company name ..." type="text" value="" />
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Memo</label><textarea name="memo" class="form-control" placeholder="Address memo ..."  value="" cols="3"></textarea>
                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
@@ -188,7 +168,7 @@
                             <div class="row">
                                 <div class="col-sm-8"></div>
                                 <div class="col-sm-4">
-                                    <button class="btn btn-primary" type="submit"> Create new item </button>
+                                    <button class="btn btn-primary" type="submit"> Add new address </button>
                                 </div>
                             </div>
                         </form>
