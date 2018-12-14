@@ -76,12 +76,8 @@
                 Quick Links
             </h6>
             <div class="element-box-tp">
-                <div class="el-buttons-list full-width" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <button class="btn btn-outline-primary btn-block" type="button" data-target="#newItemModel" data-toggle="modal"> <i class="fa fa-microchip mr-2"></i> Add new merchandise</button>
-                </div>
-
-                <div class="el-buttons-list full-width" sec:authorize="!hasRole('ROLE_ADMIN')">
-                    <button class="btn btn-outline-primary btn-block" type="button" data-target="#itemRequestModel" data-toggle="modal"> <i class="fa fa-microchip mr-2"></i> Request new merchandise</button>
+                <div class="el-buttons-list full-width">
+                    <button class="btn btn-outline-primary btn-block" type="button" data-target="#newAddressModel" data-toggle="modal"> <i class="fa fa-home mr-2"></i> Add new address</button>
                 </div>
             </div>
         </div>
@@ -90,7 +86,7 @@
     END - Sidebar
     -------------------->
 
-    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="newItemModel" role="dialog" tabindex="-1" sec:authorize="hasRole('ROLE_ADMIN')" data-backdrop="false">
+    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="newAddressModel" role="dialog" tabindex="-1" data-backdrop="false">
         <div class="modal-dialog modal-lg modal-centered" role="document">
             <div class="modal-content text-center">
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="close-label">Cancel</span><span class="os-icon os-icon-close"></span></button>
@@ -197,145 +193,6 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="itemRequestModel" role="dialog" tabindex="-1" sec:authorize="!hasRole('ROLE_ADMIN')" data-backdrop="false">
-        <div class="modal-dialog modal-lg modal-centered" role="document">
-            <div class="modal-content text-center">
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="close-label">Cancel</span><span class="os-icon os-icon-close"></span></button>
-                <div class="onboarding-side-by-side">
-                    <div class="onboarding-media">
-                        <img alt="" src="/img/bigicon5.png" width="200px">
-                    </div>
-                    <div class="onboarding-content with-gradient">
-                        <h4 class="onboarding-title">
-                            Request new Item
-                        </h4>
-                        <div class="onboarding-text">
-                            Having merchandises that not in our list, request here, we will response within 5 business days
-                        </div>
-                        <form id="formItemRequest" th:action="@{/date/shop/item/request}" method="post">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="">Item Name</label><input name="name" class="form-control" placeholder="Item name..." type="text" value="" required="required" data-error="Item name is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="">Item URL</label><input name="itemUrl" class="form-control" placeholder="Item URL..." type="url" value="" required="required" data-error="URL is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for=""> Target price (USD $)</label><input name="targetPrice" class="form-control"  type="number" value="" required="required" data-error="Target price is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="">Target order qty</label><input name="targetQty" class="form-control"  type="number" value="" required="required" data-error="Target qty is required"/>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="">Description</label><textarea name="description" class="form-control" placeholder="Request description..."  value="" cols="4"></textarea>
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8"></div>
-                                <div class="col-sm-4">
-                                    <button class="btn btn-primary" type="submit"> Request new item </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="addToCartModal" role="dialog" tabindex="-1" data-backdrop="false">
-        <div class="modal-dialog modal-centered" role="document">
-            <div class="modal-content text-center">
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="close-label">Cancel</span><span class="os-icon os-icon-close"></span></button>
-                <div class="onboarding-media">
-                    <img id="imgAddToCart" alt="" src="/img/bigicon5.png" width="200px">
-                </div>
-                <div class="onboarding-content with-gradient">
-                    <h4 class="onboarding-title" id="titleAddToCart">
-                        Item name
-                    </h4>
-                    <div class="onboarding-text">
-                        We only allow purchase that meet MOQ requirement, if no enough in stock, items will be ship delay.
-                    </div>
-                    <form id="formAddToCart">
-                        <input type="hidden" id="itemIdAddToCart">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="">Order Quantity</label><input id="addToCartOrderCount" class="form-control" type="number" value="" min="0" required="required" data-error="Order qty must great than MOQ">
-                                    <div class="help-block form-text with-errors form-control-feedback"></div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="">&nbsp;</label>
-                                    <button class="form-control btn-outline-primary" type="submit" id="btnAddToCart">Add to cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div aria-hidden="true" class="onboarding-modal modal fade animated" id="addToCartModalSuccess" role="dialog" tabindex="-1" data-backdrop="false">
-        <div class="modal-dialog modal-centered" role="document">
-            <div class="modal-content text-center">
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="close-label">Cancel</span><span class="os-icon os-icon-close"></span></button>
-                <div class="onboarding-media">
-                    <img id="imgAddToCartSuccess" alt="" src="/img/bigicon5.png" width="200px">
-                </div>
-                <div class="onboarding-content with-gradient">
-                    <h4 class="onboarding-title" id="titleAddToCartSuccess">
-                        Item name
-                    </h4>
-                    <div class="onboarding-text">
-                        Item successfully added to shopping cart
-                    </div>
-                    <form>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <a href="javascript:;" data-dismiss="modal" class="form-control btn btn-primary upper">CONTINUE SHOPPING</a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <a th:href="@{/admin/shoppingcart}" class="btn btn-dark form-control upper">GOTO SHOPPING CART</a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
