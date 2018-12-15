@@ -31,22 +31,33 @@
                                     <div class="pipeline-item">
                                         <div class="pi-controls">
                                             <!--<div class="status" th:classappend="${item.active} ? 'status-green' : 'status-red'" data-placement="top" data-toggle="tooltip" th:title="${item.active} ? 'Active' : 'DeActive'"></div>-->
-                                            <div class="status" data-placement="top" data-toggle="tooltip" title="Add to card">
+                                            <div class="status" data-placement="top" data-toggle="tooltip" title="Modify Address">
                                                 <a th:attr="onclick=|modifyAddress()|"><i class="fa fa-pencil"></i> </a>
                                             </div>
                                         </div>
                                         <div class="pi-body">
                                             <div class="avatar">
-                                                <img alt="" th:src="${address.name}">
+                                                <span>AB</span>
                                             </div>
                                             <div class="pi-info">
                                                 <div class="h6 pi-name">
-                                                    <span th:text="${address.name}"></span>
+                                                    <span th:text="${address.name}"></span><br />
+                                                </div>
+                                                <div class="h7 pi-name">
+                                                    <th:block th:if="${address.company != null && address.company != ''}">
+                                                        <span th:text="${address.company}"></span><br />
+                                                    </th:block>
+
+                                                    <th:block th:if="${address.contact != null && address.contact != ''}">
+                                                        <span th:text="${address.contact}"></span>
+                                                    </th:block>
                                                 </div>
                                                 <div class="pi-sub">
-                                                    <span th:text="${address.address1}"></span>
-                                                    <span th:text="${address.address2}"></span>
-                                                    <span th:text="${address.city + ', ' + address.state + ' ' + address.postcode}"></span>
+                                                    <span th:text="${address.address1}"></span><br />
+                                                    <th:block th:if="${address.address2 != null && address.address2 != ''}">
+                                                        <span th:text="${address.address2}"></span><br />
+                                                    </th:block>
+                                                    <span th:text="${address.city + ', ' + address.state + ' ' + address.postcode}"></span><br />
                                                     <span th:text="${address.country}"></span>
                                                 </div>
                                             </div>
@@ -99,10 +110,19 @@
                             Add new Address
                         </h4>
                         <div class="onboarding-text">
-                            You can add any address here, no restriction, add what u like.
+                            This is your shipping address, we only allow ship to USA, China and HongKong now
                         </div>
                         <form id="formNewAddress" th:action="@{/data/address/add}" method="post">
                             <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Country</label>
+                                        <select name="country" class="form-control">
+                                            <option th:each="country : ${countries}" th:value="${country.code}" th:text="${country.name}"></option>
+                                        </select>
+                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="">Full name</label><input name="name" class="form-control" placeholder="Full name..." type="text" value="" required="required" data-error="Full name is required"/>
@@ -116,7 +136,7 @@
                                         <label for="">Street address</label><input name="address1" class="form-control"  type="text" value="" placeholder="Street and number, P.O. box, c/o." required="required" data-error="Street address is required"/>
                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-top: -13px;">
                                         <input name="address2" class="form-control" type="text" value="" placeholder="Apartment, suite, unit, building, floor, etc" />
                                     </div>
                                 </div>
@@ -124,7 +144,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="">City</label><input name="city" class="form-control"  type="text" value="" required="required" data-error="Ci is required"/>
+                                        <label for="">City</label><input name="city" class="form-control"  type="text" value="" required="required" data-error="City is required"/>
                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>
@@ -144,7 +164,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="">Phone number</label><input name="contact" class="form-control"  type="text" value="" />
+                                        <label for="">Phone number</label><input name="contact" class="form-control"  type="tel" value="" />
                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
                                 </div>

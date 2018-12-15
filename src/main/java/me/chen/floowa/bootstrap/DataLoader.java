@@ -3,6 +3,7 @@ package me.chen.floowa.bootstrap;
 import me.chen.floowa.model.CouponNvidia;
 import me.chen.floowa.model.Role;
 import me.chen.floowa.model.User;
+import me.chen.floowa.service.CountryService;
 import me.chen.floowa.service.NvidiaCouponService;
 import me.chen.floowa.service.RoleService;
 import me.chen.floowa.service.UserService;
@@ -12,7 +13,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
@@ -21,6 +22,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     RoleService roleService;
     @Autowired
     NvidiaCouponService nvidiaCouponService;
+    @Autowired
+    CountryService countryService;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -96,6 +99,11 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         couponNvidia.setValid(true);
         couponNvidia.setUsed(false);
         nvidiaCouponService.create(couponNvidia);
+
+        // Create countries
+        countryService.save("CN", "PRC China");
+        countryService.save("US", "United State of America");
+        countryService.save("HK", "Hong Kong");
 
     }
 }

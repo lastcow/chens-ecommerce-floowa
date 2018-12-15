@@ -153,7 +153,7 @@
                                             </div>
                                             <select class="form-control" name="shipto" style="margin-top: -16px;" th:field="*{shipto}">
                                                 <option value="-1">Select Address</option>
-                                                <option th:each="address : ${addresses}" th:value="${address.id}" th:utext="${address.getAddress1() + ', ' + address.city + ', ' + address.state + ', ' + address.country}"></option>
+                                                <option th:each="address : ${addresses}" th:value="${address.id}" th:utext="${address.address1 + ' ' + address.address2 + ', ' + address.city + ', ' + address.state + ', ' + address.country}"></option>
                                             </select>
                                         </fieldset>
                                     </div>
